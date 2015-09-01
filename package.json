@@ -1,0 +1,26 @@
+{
+  "name": "FilterableMultiCheckCombobox",
+  "version": "0.0.0",
+  "description": "",
+  "main": "MultiComboViewModel.js",
+  "scripts": {
+    "test": "filterableCombobox"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hmarcelodn/koFilterableMultiCheckCombobox.git"
+  },
+  "keywords": [
+    "Comboxbox",
+    "Filter",
+    "Filterable",
+    "Checkbox",
+    "Knockout"
+  ],
+  "author": "Hugo Marcelo Del Negro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hmarcelodn/koFilterableMultiCheckCombobox/issues"
+  },
+  "homepage": "https://github.com/hmarcelodn/koFilterableMultiCheckCombobox"
+}
