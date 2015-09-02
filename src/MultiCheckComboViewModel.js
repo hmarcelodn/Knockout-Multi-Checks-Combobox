@@ -34,10 +34,6 @@ ko.components.register('multicheck-combobox', {
 			alert("Cancel!");
 		};
 
-		self.clearChecks = function(){
-			alert("Clear!");
-		};
-
 		self.loadAvailableOptions();
 	},
 	template: 
