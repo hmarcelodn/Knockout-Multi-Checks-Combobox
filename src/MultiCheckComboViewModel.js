@@ -1,3 +1,17 @@
+
+//Custom Handler to Stop Bubbling up on Clicks (avoid click callback binding)
+ko.bindingHandlers.stopBubble = {
+	init: function(element){
+		ko.utils.registerEventHandler(element, "click", function(event){
+			event.cancelBubble = true;
+			if(event.stopPropagation){
+				event.stopPropagation();
+			}
+		});
+	}
+};
+
+//Component
 ko.components.register('multicheck-combobox', {
 	viewModel: function(params){
 		var self = this;
@@ -21,7 +35,7 @@ ko.components.register('multicheck-combobox', {
 			}
 		});
 		
-		self.loadAvailableOptions = function(){
+		self.setupComponent = function(){
 			self.availableOptions.push({ itemName: "Test 1" });
 			self.availableOptions.push({ itemName: "Test 2" });
 			self.availableOptions.push({ itemName: "Test 3" });
@@ -34,6 +48,11 @@ ko.components.register('multicheck-combobox', {
 			self.availableOptions.push({ itemName: "Test 31" });			
 			self.availableOptions.push({ itemName: "Test 54" });
 			self.availableOptions.push({ itemName: "Test 55" });
+
+			//Handling hidden
+			$(document).on("click", function(){
+				self.hideMultiCheckMenuContainer();
+			});
 		};
 
 		self.add = function(){
@@ -59,10 +78,6 @@ ko.components.register('multicheck-combobox', {
 			self.hideMultiCheckMenuContainer();
 		};
 
-		self.onBlurEventHandler = function(){
-			self.hideMultiCheckMenuContainer();
-		};
-
 		self.onClickSearchTextBoxEventHandler = function(){
 			self.isDisplayMenuSelected(true);
 		};
@@ -71,10 +86,10 @@ ko.components.register('multicheck-combobox', {
 			self.isDisplayMenuSelected(false);
 		};
 
-		self.loadAvailableOptions();
+		self.setupComponent();
 	},
 	template: 
-			'<div class="multicheck-component-container">' +
+			'<div class="multicheck-component-container" data-bind="stopBubble: true">' +
 				'<div>' +
 					'<input type="text" placeholder="Search" data-bind="click: onClickSearchTextBoxEventHandler, textInput: searchTerm"/>' +
 				'</div>' + 
