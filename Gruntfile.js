@@ -15,7 +15,8 @@ module.exports = function(grunt){
 
 		open:{
 			all:{
-				path: 'http://localhost:9000'
+				path: 'http://localhost:9000',
+				app: 'chrome'
 			}
 		},
 
