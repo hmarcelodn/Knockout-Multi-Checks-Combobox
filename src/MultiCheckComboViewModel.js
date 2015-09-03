@@ -53,8 +53,7 @@ ko.components.register('multicheck-combobox', {
 			//Handling hidden (Depends on jquery unfortunatelly)
 			//TODO: Find an elegant way to do this
 			$(document).on("click", function(){
-				self.hideMultiCheckMenuContainer();
-				self.selectAllSelected(false);
+				self.hideMultiCheckMenuContainerButState();
 			});
 		};
 
@@ -98,6 +97,10 @@ ko.components.register('multicheck-combobox', {
 		self.hideMultiCheckMenuContainer = function(){
 			self.isDisplayMenuSelected(false);
 			self.selectAllSelected(false);
+		};
+
+		self.hideMultiCheckMenuContainerButState = function(){
+			self.isDisplayMenuSelected(false);
 		};
 
 		self.setupComponent();
