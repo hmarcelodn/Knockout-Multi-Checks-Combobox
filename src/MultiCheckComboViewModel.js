@@ -20,6 +20,7 @@ ko.components.register('multicheck-combobox', {
 		self.availableOptions = ko.observableArray(new Array());
 		self.chosenOptions = ko.observableArray();		
 		self.isDisplayMenuSelected = ko.observable(false);
+		self.selectAllSelected = ko.observable(false);
 
 		//This computes searches
 		self.filteredItems = ko.computed(function(){
@@ -36,22 +37,24 @@ ko.components.register('multicheck-combobox', {
 		});
 		
 		self.setupComponent = function(){
-			self.availableOptions.push({ itemName: "Test 1" });
-			self.availableOptions.push({ itemName: "Test 2" });
-			self.availableOptions.push({ itemName: "Test 3" });
-			self.availableOptions.push({ itemName: "Test 31" });			
-			self.availableOptions.push({ itemName: "Test 54" });
-			self.availableOptions.push({ itemName: "Test 55" });
-			self.availableOptions.push({ itemName: "Test 1" });
-			self.availableOptions.push({ itemName: "Test 2" });
-			self.availableOptions.push({ itemName: "Test 3" });
-			self.availableOptions.push({ itemName: "Test 31" });			
-			self.availableOptions.push({ itemName: "Test 54" });
-			self.availableOptions.push({ itemName: "Test 55" });
+			self.availableOptions.push({ itemName: "Argentina" });
+			self.availableOptions.push({ itemName: "Alemania" });
+			self.availableOptions.push({ itemName: "Brazil" });
+			self.availableOptions.push({ itemName: "México" });			
+			self.availableOptions.push({ itemName: "Albania" });
+			self.availableOptions.push({ itemName: "Australia" });
+			self.availableOptions.push({ itemName: "Honduras" });
+			self.availableOptions.push({ itemName: "Irlanda" });
+			self.availableOptions.push({ itemName: "USA" });
+			self.availableOptions.push({ itemName: "África" });			
+			self.availableOptions.push({ itemName: "Jamaica" });
+			self.availableOptions.push({ itemName: "Slovenia" });
 
-			//Handling hidden
+			//Handling hidden (Depends on jquery unfortunatelly)
+			//TODO: Find an elegant way to do this
 			$(document).on("click", function(){
 				self.hideMultiCheckMenuContainer();
+				self.selectAllSelected(false);
 			});
 		};
 
@@ -78,12 +81,23 @@ ko.components.register('multicheck-combobox', {
 			self.hideMultiCheckMenuContainer();
 		};
 
+		self.selectAllSelected.subscribe(function(){
+			if(self.selectAllSelected() === false){
+				self.chosenOptions([]);
+			}
+			else{
+				//Clone everything available
+				self.chosenOptions(self.availableOptions().slice(0));
+			}
+		});
+
 		self.onClickSearchTextBoxEventHandler = function(){
 			self.isDisplayMenuSelected(true);
 		};
 
 		self.hideMultiCheckMenuContainer = function(){
 			self.isDisplayMenuSelected(false);
+			self.selectAllSelected(false);
 		};
 
 		self.setupComponent();
@@ -91,10 +105,17 @@ ko.components.register('multicheck-combobox', {
 	template: 
 			'<div class="multicheck-component-container" data-bind="stopBubble: true">' +
 				'<div>' +
-					'<input type="text" placeholder="Search" data-bind="click: onClickSearchTextBoxEventHandler, textInput: searchTerm"/>' +
+					'<span>' +
+						'<label>Country</label>' +
+						'<input type="text" class="multicheck-search-input multicheck-arrow-down" placeholder="Search" data-bind="click: onClickSearchTextBoxEventHandler, textInput: searchTerm"/>' +
+					'</span>'+
 				'</div>' + 
 				'<div class="multicheck-menu-container" data-bind="visible: isDisplayMenuSelected">' +
 					'<div class="multicheck-list-container">' +
+						'<span data-bind="visible: searchTerm().length === 0">' +
+							'<input type="checkbox" data-bind="checked: selectAllSelected" />' +
+							'<span>Select All</span>' +
+						'</span>' +
 						'<ul class="multicheck-list" data-bind="foreach: filteredItems" >' +
 								'<li>' +
 									'<div>' +

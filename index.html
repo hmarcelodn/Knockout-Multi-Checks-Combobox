@@ -2,11 +2,40 @@
 
 <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 
-<h1>Multiple Filter Check Combobox - Demo (using liveReloading))</h1>
+<header>
+	<h1>Multiple Filter Drowpdown Check - Demo (Live-Reloading))</h1>
+	<nav>
+		<a href="https://github.com/hmarcelodn/Knockout-Multi-Checks-Combobox">Github Code!</a>
+	</nav>
+</header>
 
-<div data-bind='component: "multicheck-combobox"'></div>
+<section class="section-left">
+	<header>Column Left</header>
+	<article>
+		<span class="control-text">Control #1</span>
+		<div id="multicheck-component" data-bind='component: "multicheck-combobox"'></div>
+	</article>
+	<article>
+		<span class="control-text">Control #2</span>
+		<div id="multicheck-component" data-bind='component: "multicheck-combobox"'></div>
+	</article>
+</section>
+
+<section class="section-right">
+	<header>Column Right</header>
+	<article>
+		<span class="control-text">Control #3</span>
+		<div id="multicheck-component" data-bind='component: "multicheck-combobox"'></div>
+	</article>
+	<article>
+		<span class="control-text">Control #4</span>
+		<div id="multicheck-component" data-bind='component: "multicheck-combobox"'></div>
+	</article>
+</section>
 
 <link rel="stylesheet" href="http://localhost:9000/src/MultiCheckCombo.css" />
+<link rel="stylesheet" href="http://localhost:9000/src/index.css" />
+
 <script type="text/javascript" src="http://localhost:9000/bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript" src="http://localhost:9000/bower_components/knockout/dist/knockout.js"></script>
 <script type="text/javascript" src="http://localhost:9000/src/MultiCheckComboViewModel.js"></script>
